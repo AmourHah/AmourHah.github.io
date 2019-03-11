@@ -151,6 +151,122 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Java类及继承类的代码执行顺序" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/03/12/Java类及继承类的代码执行顺序/">Java类及继承类的代码执行顺序</a>
+    </h1>
+  
+
+        
+        <a href="/2019/03/12/Java类及继承类的代码执行顺序/" class="archive-article-date">
+  	<time datetime="2019-03-11T16:01:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-12</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p>Java中，new一个类的对象，类里面的静态代码块、非静态代码、无参构造方法、有参构造方法、类的一般方法等部分，它们的执行顺序相对来说比较简单，用程序也很容易验证。比如新建一个测试父类。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">public class FatherTest &#123;</span><br><span class="line">    private String name;</span><br><span class="line">    FatherTest()&#123;</span><br><span class="line">       System.out.println(&quot;--父类的无参构造函数--&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    FatherTest(String name)&#123;</span><br><span class="line">       this.name=name;</span><br><span class="line">       System.out.println(&quot;--父类的有参构造函数--&quot;+this.name);</span><br><span class="line">    &#125;</span><br><span class="line">    static&#123;</span><br><span class="line"></span><br><span class="line">       System.out.println(&quot;--父类的静态代码块--&quot;);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    &#123;</span><br><span class="line">       System.out.println(&quot;--父类的非静态代码块--&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void speak()&#123;</span><br><span class="line">       System.out.println(&quot;--父类的方法--&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">       System.out.println(&quot;--父类主程序--&quot;)；</span><br><span class="line">       FatherTest father=new FatherTest(&quot;父亲的名字&quot;);</span><br><span class="line">       father.speak();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"> ``` </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">执行结果为：</span><br><span class="line"></span><br><span class="line">--父类的静态代码块--</span><br><span class="line"></span><br><span class="line">--父类主程序--</span><br><span class="line"></span><br><span class="line">--父类的非静态代码块--</span><br><span class="line"></span><br><span class="line">--父类的有参构造函数--父亲的名字</span><br><span class="line"></span><br><span class="line">--父类的方法—</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line">可以很明显的看出来执行顺序：静态代码块—主程序—非静态代码块—构造函数—一般方法。</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">如果加入子类的继承以后，情况就会变得复杂些。比如我们再新建一个测试子类。</span><br></pre></td></tr></table></figure>
+<p>public class SonTest extends FatherTest {<br>    private String name;<br>    static{<br>       System.out.println(“–子类的静态代码块–”);<br>    }</p>
+<pre><code>{
+   System.out.println(&quot;--子类的非静态代码块--&quot;);
+}
+
+SonTest(){
+   System.out.println(&quot;--子类的无参构造函数--&quot;);
+}
+
+SonTest(String name){
+   this.name=name;
+   System.out.println(&quot;--子类的有参构造函数--&quot;+this.name);
+}
+
+@Override
+public void speak(){
+   System.out.println(&quot;--子类Override了父类的方法--&quot;);
+}  
+</code></pre><p> }</p>
+<p>public static void main(String[] args) {<br>       System.out.println(“–子类主程序–”);<br>       FatherTest father=new FatherTest(“父亲的名字”);<br>       father.speak();<br>       SonTest son=new SonTest(“儿子的名字”);<br>       son.speak();</p>
+<p> }<br> <code>`</code></p>
+<p>执行结果为：</p>
+<p>–父类的静态代码块–</p>
+<p>–子类的静态代码块–</p>
+<p>–子类主程序–</p>
+<p>–父类的非静态代码块–</p>
+<p>–父类的有参构造函数–父亲的名字</p>
+<p>–父类的方法–</p>
+<p>–父类的非静态代码块–</p>
+<p>–父类的无参构造函数–</p>
+<p>–子类的非静态代码块–</p>
+<p>–子类的有参构造函数–儿子的名字</p>
+<p>–子类Override了父类的方法–</p>
+<p>加入了子类以后，执行顺序有了新的变化，我们可以总结一下。首先第一部分执行的是父类的静态代码块—子类的静态代码块—主程序。这一部分都是执行一次，与建立多少对象没有关系。第二部分new了一个父类对象，并调用了方法。执行了它的非静态代码块—构造函数—一般方法。第三部分new了一个子类的对象，并调用了方法。执行顺序为父类的非静态代码块—父类的无参构造函数，然后是子类的非静态代码块—子类构造函数—子类的方法。</p>
+<h2 id="小结："><a href="#小结：" class="headerlink" title="小结："></a>小结：</h2><p>1.类代码执行顺序（类本身集成main）</p>
+<p>–类的静态代码块–</p>
+<p>–类主程序–（new之前的一部分）</p>
+<p>–类的非静态代码块–</p>
+<p>–类的构造函数–（调用有参还是空参看具体参数）</p>
+<p>–类的方法—（new之后的一部分） </p>
+<p>2.继承类代码执行顺序（继承类本身集成main测试）</p>
+<p>–父类的静态代码块–</p>
+<p>–子类的静态代码块–</p>
+<p>–子类主程序– （new之前的一部分）         //前三步无论new多少个对象只执行一次</p>
+<p>–父类的非静态代码块–</p>
+<p>–父类的有参构造函数–父亲的名字</p>
+<p>–父类的方法–                          //这一部分是new父类的执行过程，前三步已经执行过故只执行后三步</p>
+<p>–父类的非静态代码块–</p>
+<p>–父类的无参构造函数–</p>
+<p>–子类的非静态代码块–</p>
+<p>–子类的有参构造函数–儿子的名字</p>
+<p>–子类Override了父类的方法–            //这一部分是new子类的代码执行过程</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/03/12/Java类及继承类的代码执行顺序/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-XPS9360-Hackintosh使用笔记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -277,94 +393,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2019/03/09/Markdown基本操作/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Java类及继承类的代码执行顺序小结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Java中，new一个类的对象，类里面的静态代码块、非静态代码、无参构造方法、有参构造方法、类的一般方法等部分，它们的执行顺序相对来说比较简单，用程序也很容易验证。比如新建一个测试父类。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">public class FatherTest &#123;</span><br><span class="line">    private String name;</span><br><span class="line">    FatherTest()&#123;</span><br><span class="line">       System.out.println(&quot;--父类的无参构造函数--&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    FatherTest(String name)&#123;</span><br><span class="line">       this.name=name;</span><br><span class="line">       System.out.println(&quot;--父类的有参构造函数--&quot;+this.name);</span><br><span class="line">    &#125;</span><br><span class="line">    static&#123;</span><br><span class="line"></span><br><span class="line">       System.out.println(&quot;--父类的静态代码块--&quot;);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    &#123;</span><br><span class="line">       System.out.println(&quot;--父类的非静态代码块--&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void speak()&#123;</span><br><span class="line">       System.out.println(&quot;--父类的方法--&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
-<p>加入一个main程序后</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">       System.out.println(&quot;--父类主程序--&quot;)；</span><br><span class="line">       FatherTest father=new FatherTest(&quot;父亲的名字&quot;);</span><br><span class="line">       father.speak();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line">执行结果为：</span><br><span class="line"></span><br><span class="line">--父类的静态代码块--</span><br><span class="line"></span><br><span class="line">--父类主程序--</span><br><span class="line"></span><br><span class="line">--父类的非静态代码块--</span><br><span class="line"></span><br><span class="line">--父类的有参构造函数--父亲的名字</span><br><span class="line"></span><br><span class="line">--父类的方法—</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line">可以很明显的看出来执行顺序：静态代码块—主程序—非静态代码块—构造函数—一般方法。</span><br><span class="line"></span><br><span class="line">如果加入子类的继承以后，情况就会变得复杂些。比如我们再新建一个测试子类。</span><br></pre></td></tr></table></figure>
-<p>public class SonTest extends FatherTest {<br>    private String name;<br>    static{<br>       System.out.println(“–子类的静态代码块–”);<br>    }</p>
-<pre><code>{
-   System.out.println(&quot;--子类的非静态代码块--&quot;);
-}
-
-SonTest(){
-   System.out.println(&quot;--子类的无参构造函数--&quot;);
-}
-
-SonTest(String name){
-   this.name=name;
-   System.out.println(&quot;--子类的有参构造函数--&quot;+this.name);
-}
-
-@Override
-public void speak(){
-   System.out.println(&quot;--子类Override了父类的方法--&quot;);
-}  
-</code></pre><p> }<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">然后再加入一个main函数</span><br></pre></td></tr></table></figure></p>
-<p>public static void main(String[] args) {<br>       System.out.println(“–子类主程序–”);<br>       FatherTest father=new FatherTest(“父亲的名字”);<br>       father.speak();<br>       SonTest son=new SonTest(“儿子的名字”);<br>       son.speak();</p>
-<p> }<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">执行结果为：</span><br><span class="line"></span><br><span class="line">--父类的静态代码块--</span><br><span class="line"></span><br><span class="line">--子类的静态代码块--</span><br><span class="line"></span><br><span class="line">--子类主程序--</span><br><span class="line"></span><br><span class="line">--父类的非静态代码块--</span><br><span class="line"></span><br><span class="line">--父类的有参构造函数--父亲的名字</span><br><span class="line"></span><br><span class="line">--父类的方法--</span><br><span class="line"></span><br><span class="line">--父类的非静态代码块--</span><br><span class="line"></span><br><span class="line">--父类的无参构造函数--</span><br><span class="line"></span><br><span class="line">--子类的非静态代码块--</span><br><span class="line"></span><br><span class="line">--子类的有参构造函数--儿子的名字</span><br><span class="line"></span><br><span class="line">--子类Override了父类的方法--</span><br><span class="line"></span><br><span class="line">加入了子类以后，执行顺序有了新的变化，我们可以总结一下。首先第一部分执行的是父类的静态代码块—子类的静态代码块—主程序。这一部分都是执行一次，与建立多少对象没有关系。第二部分new了一个父类对象，并调用了方法。执行了它的非静态代码块—构造函数—一般方法。第三部分new了一个子类的对象，并调用了方法。执行顺序为父类的非静态代码块—父类的无参构造函数，然后是子类的非静态代码块—子类构造函数—子类的方法。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">## 小结：</span><br><span class="line"></span><br><span class="line">1.类代码执行顺序（类本身集成main）</span><br></pre></td></tr></table></figure></p>
-<p>–类的静态代码块–</p>
-<p>–类主程序–（new之前的一部分）</p>
-<p>–类的非静态代码块–</p>
-<p>–类的构造函数–（调用有参还是空参看具体参数）</p>
-<p>–类的方法—（new之后的一部分）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">2.继承类代码执行顺序（继承类本身集成main测试）</span><br></pre></td></tr></table></figure></p>
-<p>–父类的静态代码块–</p>
-<p>–子类的静态代码块–</p>
-<p>–子类主程序– （new之前的一部分）         //前三步无论new多少个对象只执行一次</p>
-<p>–父类的非静态代码块–</p>
-<p>–父类的有参构造函数–父亲的名字</p>
-<p>–父类的方法–                          //这一部分是new父类的执行过程，前三步已经执行过故只执行后三步</p>
-<p>–父类的非静态代码块–</p>
-<p>–父类的无参构造函数–</p>
-<p>–子类的非静态代码块–</p>
-<p>–子类的有参构造函数–儿子的名字</p>
-<p>–子类Override了父类的方法–            //这一部分是new子类的代码执行过程<br><code>`</code></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/11/22/Java类及继承类的代码执行顺序小结/">展开全文 >></a>
         </p>
       
 
