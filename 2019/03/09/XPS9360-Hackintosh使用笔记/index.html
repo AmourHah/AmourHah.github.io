@@ -8,17 +8,17 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>XPS9360_Hackintosh使用笔记 | AmourHah&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="安装macOS1.下载镜像2.写入U盘  win工具：etcher下载 macOS 工具：终端命令sudo /Applications/Install\ macOS\ Mojave.app/Contents/Resources/createinstallmedia --volume /Volumes/USB --applicationpath /Applications/Install\ macO">
+  <meta name="description" content="安装macOS下载镜像写入U盘 win工具：etcher下载 macOS 工具：终端命令 1sudo /Applications/Install\ macOS\ Mojave.app/Contents/Resources/createinstallmedia --volume /Volumes/USB --applicationpath /Applications/Install\ macOS\">
 <meta property="og:type" content="article">
 <meta property="og:title" content="XPS9360_Hackintosh使用笔记">
 <meta property="og:url" content="http://yoursite.com/2019/03/09/XPS9360-Hackintosh使用笔记/index.html">
 <meta property="og:site_name" content="AmourHah&#39;s Blog">
-<meta property="og:description" content="安装macOS1.下载镜像2.写入U盘  win工具：etcher下载 macOS 工具：终端命令sudo /Applications/Install\ macOS\ Mojave.app/Contents/Resources/createinstallmedia --volume /Volumes/USB --applicationpath /Applications/Install\ macO">
+<meta property="og:description" content="安装macOS下载镜像写入U盘 win工具：etcher下载 macOS 工具：终端命令 1sudo /Applications/Install\ macOS\ Mojave.app/Contents/Resources/createinstallmedia --volume /Volumes/USB --applicationpath /Applications/Install\ macOS\">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-03-11T14:44:35.289Z">
+<meta property="og:updated_time" content="2019-03-12T05:50:50.541Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="XPS9360_Hackintosh使用笔记">
-<meta name="twitter:description" content="安装macOS1.下载镜像2.写入U盘  win工具：etcher下载 macOS 工具：终端命令sudo /Applications/Install\ macOS\ Mojave.app/Contents/Resources/createinstallmedia --volume /Volumes/USB --applicationpath /Applications/Install\ macO">
+<meta name="twitter:description" content="安装macOS下载镜像写入U盘 win工具：etcher下载 macOS 工具：终端命令 1sudo /Applications/Install\ macOS\ Mojave.app/Contents/Resources/createinstallmedia --volume /Volumes/USB --applicationpath /Applications/Install\ macOS\">
   
     <link rel="alternative" href="/atom.xml" title="AmourHah&#39;s Blog" type="application/atom+xml">
   
@@ -170,12 +170,15 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="安装macOS"><a href="#安装macOS" class="headerlink" title="安装macOS"></a>安装macOS</h2><p>1.下载镜像<br>2.写入U盘</p>
-<ul>
+        <h2 id="安装macOS"><a href="#安装macOS" class="headerlink" title="安装macOS"></a>安装macOS</h2><h3 id="下载镜像"><a href="#下载镜像" class="headerlink" title="下载镜像"></a>下载镜像</h3><h3 id="写入U盘"><a href="#写入U盘" class="headerlink" title="写入U盘"></a>写入U盘</h3><ul>
 <li>win工具：<a href="https://www.balena.io/etcher/" target="_blank" rel="noopener">etcher下载</a></li>
-<li>macOS 工具：<br>终端命令<br><code>sudo /Applications/Install\ macOS\ Mojave.app/Contents/Resources/createinstallmedia --volume /Volumes/USB --applicationpath /Applications/Install\ macOS\ Mojave.app --nointeraction</code><br>3.替换efi<br><a href="https://github.com/the-darkvoid/XPS9360-macOS" target="_blank" rel="noopener">the-darkvoid_i7_8750U</a><br><a href="https://github.com/0xHJK/XPS13-9360-i5-8250U-macOS" target="_blank" rel="noopener">i5_8250U修改版</a><br>4.后续</li>
+<li>macOS 工具：<br>终端命令 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo /Applications/Install\ macOS\ Mojave.app/Contents/Resources/createinstallmedia --volume /Volumes/USB --applicationpath /Applications/Install\ macOS\ Mojave.app --nointeraction</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="替换efi"><a href="#替换efi" class="headerlink" title="替换efi"></a>替换efi</h3><p><a href="https://github.com/the-darkvoid/XPS9360-macOS" target="_blank" rel="noopener">the-darkvoid_i7_8750U</a><br><a href="https://github.com/0xHJK/XPS13-9360-i5-8250U-macOS" target="_blank" rel="noopener">i5_8250U修改版</a></p>
+<h3 id="后续"><a href="#后续" class="headerlink" title="后续"></a>后续</h3><ul>
 <li><p>运行终端，cd到该目录下，运行如下几条命令： </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">bash XPS9360.sh --compile-dsdt </span><br><span class="line">bash XPS9360.sh --enable-3rdparty </span><br><span class="line">bash XPS9360.sh --disable-touchid</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">bash XPS9360.sh --compile-dsdt </span><br><span class="line">bash XPS9360.sh --<span class="built_in">enable</span>-3rdparty </span><br><span class="line">bash XPS9360.sh --<span class="built_in">disable</span>-touchid</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>修复耳麦声音<br>  执行comback，重启选择headset</p>
 </li>
@@ -185,7 +188,18 @@
 </blockquote>
 </li>
 </ul>
-<h2 id="插件配置"><a href="#插件配置" class="headerlink" title="插件配置"></a>插件配置</h2><p>1.iterm2配置<br><a href="https://www.cnblogs.com/diyxiaoshitou/p/9017413.html" target="_blank" rel="noopener">主题美化</a><br>2.JDK配置<br><code>export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_192.jdk/Contents/Home</code><br>3.mysql配置<br><code>export PATH=${PATH}:/usr/local/mysql/bin</code><br>4.python安装<br><code>brew install python3</code><br>5.idea pycharm默认配置</p>
+<h2 id="插件配置"><a href="#插件配置" class="headerlink" title="插件配置"></a>插件配置</h2><h3 id="iterm2配置"><a href="#iterm2配置" class="headerlink" title="iterm2配置"></a>iterm2配置</h3><p><a href="https://www.cnblogs.com/diyxiaoshitou/p/9017413.html" target="_blank" rel="noopener">主题美化</a></p>
+<h3 id="JDK配置"><a href="#JDK配置" class="headerlink" title="JDK配置"></a>JDK配置</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_192.jdk/Contents/Home</span><br></pre></td></tr></table></figure>
+<h3 id="mysql配置"><a href="#mysql配置" class="headerlink" title="mysql配置"></a>mysql配置</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$&#123;PATH&#125;</span>:/usr/<span class="built_in">local</span>/mysql/bin</span><br></pre></td></tr></table></figure>
+<h3 id="python安装"><a href="#python安装" class="headerlink" title="python安装"></a>python安装</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install python3</span><br></pre></td></tr></table></figure>
+<h3 id="idea-pycharm默认配置"><a href="#idea-pycharm默认配置" class="headerlink" title="idea pycharm默认配置"></a>idea pycharm默认配置</h3><h2 id="Chrome-70-0-3538-110"><a href="#Chrome-70-0-3538-110" class="headerlink" title="Chrome 70.0.3538.110"></a>Chrome 70.0.3538.110</h2><h3 id="切换为老版UI"><a href="#切换为老版UI" class="headerlink" title="切换为老版UI"></a>切换为老版UI</h3><p>浏览器输入：<code>chrome://flags/#top-chrome-md</code></p>
+<p>将<code>Default</code>改为<code>Normal</code>即可</p>
+<h3 id="Mac-禁止Chrome更新"><a href="#Mac-禁止Chrome更新" class="headerlink" title="Mac 禁止Chrome更新"></a>Mac 禁止Chrome更新</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> ~/Library/Google</span><br><span class="line">$ ls</span><br><span class="line">GoogleSoftwareUpdate</span><br></pre></td></tr></table></figure>
+<p>使Google丢失对文件夹操作的权限（达到禁止更新Chrome的效果）<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo chown root:wheel GoogleSoftwareUpdate</span><br></pre></td></tr></table></figure></p>
+<h3 id="下载地址（官方）："><a href="#下载地址（官方）：" class="headerlink" title="下载地址（官方）："></a>下载地址（官方）：</h3><p>win:</p>
+<p><a href="https://dl.google.com/release2/chrome/QNAYH6TuhXA_70.0.3538.110/70.0.3538.110_chrome_installer.exe" target="_blank" rel="noopener">https://dl.google.com/release2/chrome/QNAYH6TuhXA_70.0.3538.110/70.0.3538.110_chrome_installer.exe</a></p>
+<p>mac:</p>
+<p><a href="https://dl.google.com/release2/chrome/AODD0i9IJlvh_70.0.3538.110/GoogleChrome-70.0.3538.110.dmg" target="_blank" rel="noopener">https://dl.google.com/release2/chrome/AODD0i9IJlvh_70.0.3538.110/GoogleChrome-70.0.3538.110.dmg</a></p>
 
       
 
